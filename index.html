@@ -22,34 +22,39 @@
           </div>
       
           <div class="desktop-icon" onclick="openWindow('projects')">
-              <img src="/Windows XP Icons/Windows Catalog.png" alt="An open magazine or brochure with vibrant colored blocks" width="48" height="48">
+              <img src="/assets/Windows Catalog.png" alt="An open magazine or brochure with vibrant colored blocks" width="48" height="48">
               <p>Projects</p>
           </div>
       
           <div class="desktop-icon" onclick="openWindow('skills')">
-              <img src="/Windows XP Icons/Performance Monitor.png" alt="A speedometer-like gauge indicating performance" width="48" height="48">
+              <img src="/assets/Performance Monitor.png" alt="A speedometer-like gauge indicating performance" width="48" height="48">
               <p>Skills</p>
           </div>
       
           <div class="desktop-icon" onclick="openWindow('contact')">
-              <img src="/Windows XP Icons/Outlook Express.png" alt="Icon depicting email exchange with curved blue arrows" width="48" height="48">
+              <img src="/assets/Outlook Express.png" alt="Icon depicting email exchange with curved blue arrows" width="48" height="48">
               <p>Contact</p>
           </div>
       
           <div class="desktop-icon" onclick="openWindow('awards')">
-              <img src="/Windows XP Icons/Fax Sent Succesfully.png" alt="A document with a checkmark indicating success" width="48" height="48">
+              <img src="/assets/Fax Sent Succesfully.png" alt="A document with a checkmark indicating success" width="48" height="48">
               <p>Awards</p>
           </div>
       
           <div class="desktop-icon" onclick="openWindow('academics')">
-              <img src="/Windows XP Icons/OE Mark as read.png" alt="A document with glasses icon" width="48" height="48">
+              <img src="/assets/OE Mark as read.png" alt="A document with glasses icon" width="48" height="48">
               <p>Academics</p>
           </div>
       
           <div class="desktop-icon" onclick="openWindow('gallery')">
-              <img src="/Windows XP Icons/Click To Record.png" alt="A recording button icon" width="48" height="48">
+              <img src="/assets/Click To Record.png" alt="A recording button icon" width="48" height="48">
               <p>Gallery</p>
           </div>
+
+          <div class="desktop-icon" onclick="openWindowMP3('mp3-player')">
+            <img src="/assets/Windows-Media-Player-icon.png" alt="A recording button icon" width="48" height="48">
+            <p>Music</p>
+        </div>
       
           <div id="welcome-window" class="window">
               <div class="window-header">
@@ -177,32 +182,32 @@
                   </div>
                   <div class="gallery-grid">
                       <div class="gallery-item">
-                          <img src="/1695355251622.jpg" alt="A young man stands in front of the Air Force Research Laboratory building" width="200" height="150">
+                          <img src="/assets/1695355251622.jpg" alt="A young man stands in front of the Air Force Research Laboratory building" width="200" height="150">
                           <div class="gallery-item-title">Air Force Research Laboratory Visit</div>
                       </div>
                       
                       <div class="gallery-item">
-                          <img src="/1702196249257.jpg" alt="A large group of smiling UTEP Aerospace students pose for a group photo" width="200" height="150">
+                          <img src="/assets/1702196249257.jpg" alt="A large group of smiling UTEP Aerospace students pose for a group photo" width="200" height="150">
                           <div class="gallery-item-title">UTEP Aerospace Center Team</div>
                       </div>
                       
                       <div class="gallery-item">
-                          <img src="/1722906111163.jpg" alt="Group photo with mentor in a modern office space" width="200" height="150">
+                          <img src="/assets/1722906111163.jpg" alt="Group photo with mentor in a modern office space" width="200" height="150">
                           <div class="gallery-item-title">Professional Mentorship Session</div>
                       </div>
                       
                       <div class="gallery-item">
-                          <img src="/1715874490021.jpg" alt="Conference badge from UTEP at Realize LIVE event" width="200" height="150">
+                          <img src="/assets/1715874490021.jpg" alt="Conference badge from UTEP at Realize LIVE event" width="200" height="150">
                           <div class="gallery-item-title">Realize LIVE Conference Badge</div>
                       </div>
                       
                       <div class="gallery-item">
-                          <img src="/1715874489659.jpg" alt="Siemens conference presentation hall with speakers on stage" width="200" height="150">
+                          <img src="/assets/1715874489659.jpg" alt="Siemens conference presentation hall with speakers on stage" width="200" height="150">
                           <div class="gallery-item-title">Siemens Conference Presentation</div>
                       </div>
                       
                       <div class="gallery-item">
-                          <img src="/1719148856373.jpg" alt="A person stands next to a large Ronald McDonald Funko Pop figure" width="200" height="150">
+                          <img src="/assets/1719148856373.jpg" alt="A person stands next to a large Ronald McDonald Funko Pop figure" width="200" height="150">
                           <div class="gallery-item-title">Ronald McDonald Funko Pop Display</div>
                       </div>
                   </div>
@@ -212,7 +217,7 @@
           <div id="mp3-player" class="window">
               <div class="window-header">
                   Windows Media Player
-                  <button class="close-btn" onclick="closeWindow('mp3-player')"></button>
+                  <button class="close-btn" onclick="closeWindowMP3('mp3-player')"></button>
               </div>
               <div class="player-controls">
                   <div class="song-info">Now Playing: Frutiger Aero</div>
@@ -231,7 +236,7 @@
           </div>
       
           <div class="clippy" onclick="clippySpeak()">
-              <img src="/clippy2.png" alt="Clippy, the Microsoft Office Assistant with googly eyes and eyebrows on yellow notepad paper" width="120" height="120">
+              <img src="/assets/clippy2.png" alt="Clippy, the Microsoft Office Assistant with googly eyes and eyebrows on yellow notepad paper" width="120" height="120">
               <div class="clippy-balloon">
                   Hi! I'm Clippy, your office assistant. It looks like you're exploring a portfolio. Would you like help with that?
               </div>
@@ -245,7 +250,7 @@
       
           <div class="start-menu">
               <div class="start-menu-header">
-                  <img src="/assets/xplogo.png" alt="Windows XP Logo" width="40" height="40" style="margin-right: 10px;">
+                  <img src="/assets/logowindowspng.png" alt="Windows XP Logo" width="40" height="40" style="margin-right: 10px;">
                   Windows XP
               </div>
               <div class="start-menu-content">

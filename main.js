@@ -1,260 +1,248 @@
+// Global Variables
 let activeWindow = null;
 let offset = { x: 0, y: 0 };
 let isDragging = false;
 let audio;
 let progressBar;
+let currentSongIndex = 0;
+
+const songs = [
+    { src: "/assets/frutiger aero.mp3", title: "Frutiger Aero" },
+    { src: "/assets/The HampsterDance Song.mp3", title: "Hampster Dance" },
+    { src: "/assets/Keyboard Cat! - THE ORIGINAL!.mp3", title: "Keyboard Cat" },
+    { src: "/assets/009 Sound System - With a Spirit (Short Version).mp3", title: "009 Sound System" },
+    { src: "/assets/scizzie - aquatic ambience.mp3", title: "Aquatic Ambience" }
+];
+
+// Exposing Functions to Global Scope
 window.openWindow = openWindow;
 window.closeWindow = closeWindow;
 window.clippySpeak = clippySpeak;
+window.togglePlay = togglePlay;
+window.nextSong = nextSong;
+window.stopAudio = stopAudio;
+window.updateVolume = updateVolume;
+window.changeView = changeView;
+window.closeWindowMP3 = closeWindowMP3;
+window.openWindowMP3 = openWindowMP3;
 
-const songs = [
-    {
-        src: "/frutiger aero.mp3",
-        title: "Frutiger Aero"
-    },
-    {
-        src: "/The HampsterDance Song.mp3",
-        title: "Hampster Dance"
-    },
-    {
-        src: "/Keyboard Cat! - THE ORIGINAL!.mp3",
-        title: "Keyboard Cat"
-    },
-    {
-        src: "/009 Sound System - With a Spirit (Short Version).mp3",
-        title: "009 Sound System"
-    },
-    {
-        src: "/scizzie - aquatic ambience.mp3",
-        title: "Aquatic Ambience"
-    }
-];
 
-let currentSongIndex = 0;
-
+// DOMContentLoaded Listener
 document.addEventListener('DOMContentLoaded', () => {
     const cursor = document.querySelector('.custom-cursor');
     cursor.style.display = 'block';
 
     audio = document.getElementById('xp-audio');
-    audio.volume = 0.5; // Set initial volume to 50%
     progressBar = document.querySelector('.progress-bar');
-    
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration && !isNaN(audio.duration)) {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            if (!isNaN(progress) && isFinite(progress)) {
-                progressBar.value = progress;
-            }
-        }
-    });
 
-    audio.addEventListener('loadedmetadata', () => {
-        progressBar.value = 0;
-    });
+    // Preload first song
+    preloadFirstSong();
 
+    // Audio Event Listeners
+    audio.addEventListener('timeupdate', updateProgressBar);
+    audio.addEventListener('loadedmetadata', resetProgressBar);
+    audio.addEventListener('ended', nextSong);
+
+    // Welcome Window Setup
     const player = document.getElementById('mp3-player');
     player.style.display = 'block';
-
-    // Show welcome window on load
     setTimeout(() => {
         openWindow('welcome');
-        // Position it in the center
-        const welcomeWindow = document.getElementById('welcome-window');
-        welcomeWindow.style.left = '50%';
-        welcomeWindow.style.top = '50%';
-        welcomeWindow.style.transform = 'translate(-50%, -50%)';
-        welcomeWindow.style.width = '500px'; // Set a good default width
-    }, 500); // Small delay to ensure smooth animation
+        positionWelcomeWindow();
+    }, 500);
 
-    // Debounce function to limit rapid updates
-    function debounce(func, wait) {
+    // Debounce Mouse Movement for Custom Cursor
+    const debounce = (func, wait) => {
         let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
+        return (...args) => {
             clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
+            timeout = setTimeout(() => func(...args), wait);
         };
+    };
+
+    document.addEventListener('mousemove', debounce(updateCursor, 5));
+    document.addEventListener('mouseleave', () => (cursor.style.opacity = '0'));
+    document.addEventListener('mouseenter', () => (cursor.style.opacity = '1'));
+
+    // Hover Effects for Cursor
+    setupHoverEffects();
+
+    // Start Menu Toggle
+    setupStartMenu();
+});
+
+// Helper Functions
+function preloadFirstSong() {
+    const songInfo = document.querySelector('.song-info');
+    const firstSong = songs[0];
+    audio.src = firstSong.src;
+    audio.load();
+    songInfo.textContent = `Now Playing: ${firstSong.title}`;
+    audio.volume = 0.5;
+}
+
+function updateProgressBar() {
+    if (audio.duration && !isNaN(audio.duration)) {
+        progressBar.value = (audio.currentTime / audio.duration) * 100;
     }
+}
 
-    // Optimize mousemove handler with debouncing
-    const updateCursor = debounce((e) => {
-        requestAnimationFrame(() => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
-    }, 5); // 5ms debounce time
+function resetProgressBar() {
+    progressBar.value = 0;
+}
 
-    document.addEventListener('mousemove', updateCursor);
+function positionWelcomeWindow() {
+    const welcomeWindow = document.getElementById('welcome-window');
+    welcomeWindow.style.left = '50%';
+    welcomeWindow.style.top = '50%';
+    welcomeWindow.style.transform = 'translate(-50%, -50%)';
+    welcomeWindow.style.width = '500px';
+}
 
-    // Hide cursor when mouse leaves window
-    document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
-    });
+function updateCursor(e) {
+    const cursor = document.querySelector('.custom-cursor');
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+}
 
-    // Show cursor when mouse enters window
-    document.addEventListener('mouseenter', () => {
-        cursor.style.opacity = '1';
-    });
-
-    // Cache hoverable elements and optimize hover handling
+function setupHoverEffects() {
     const hoverableElements = document.querySelectorAll('.desktop-icon, .window-header, .close-btn, .clippy, .start-button');
-    const cursorImg = cursor.querySelector('img');
-    
+    const cursorImg = document.querySelector('.custom-cursor img');
+
     hoverableElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursorImg.src = '/assets/handcursor.png';
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            cursorImg.src = '/assets/cursorwhitepng.png';
-        });
+        element.addEventListener('mouseenter', () => (cursorImg.src = '/assets/handcursor.png'));
+        element.addEventListener('mouseleave', () => (cursorImg.src = '/assets/cursorwhitepng.png'));
     });
+}
 
-    audio.addEventListener('ended', () => {
-        nextSong();
-    });
-});
-
-let startMenuOpen = false;
-
-document.querySelector('.start-button').addEventListener('click', () => {
+function setupStartMenu() {
+    let startMenuOpen = false;
+    const startButton = document.querySelector('.start-button');
     const startMenu = document.querySelector('.start-menu');
-    startMenuOpen = !startMenuOpen;
-    startMenu.style.display = startMenuOpen ? 'block' : 'none';
-});
 
-// Close start menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.start-menu') && !e.target.closest('.start-button')) {
-        document.querySelector('.start-menu').style.display = 'none';
-        startMenuOpen = false;
-    }
-});
+    startButton.addEventListener('click', () => {
+        startMenuOpen = !startMenuOpen;
+        startMenu.style.display = startMenuOpen ? 'block' : 'none';
+    });
 
-// Add easter egg functionality
-document.querySelectorAll('.start-menu-item').forEach((item, index) => {
-    item.addEventListener('click', () => {
-        switch(index) {
-            case 0: // Record message
-                alert('🎤 *Static noise* Agent, this message will self-destruct in 5 seconds... Just kidding! 😄');
-                break;
-            case 1: // Barrel roll
-                document.body.style.transition = 'transform 1s';
-                document.body.style.transform = 'rotate(360deg)';
-                setTimeout(() => {
-                    document.body.style.transform = 'rotate(0deg)';
-                }, 1000);
-                break;
-            case 2: // Secret files
-                const messages = [
-                    "ACCESS DENIED: Nice try! 😎",
-                    "ERROR 404: Secrets not found... or are they? 🤔",
-                    "SYSTEM MESSAGE: The secrets are actually in another castle! 🏰"
-                ];
-                alert(messages[Math.floor(Math.random() * messages.length)]);
-                break;
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.start-menu') && !e.target.closest('.start-button')) {
+            startMenu.style.display = 'none';
+            startMenuOpen = false;
         }
     });
-});
 
-// Add window resize handlers
-const windows = document.querySelectorAll('.window');
-windows.forEach(window => {
-    const resizer = document.createElement('div');
-    resizer.className = 'window-resizer';
-    resizer.style.cssText = `
-        width: 10px;
-        height: 10px;
-        background: #cccccc;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        cursor: se-resize;
-    `;
-    
-    window.appendChild(resizer);
-    
-    let isResizing = false;
-    let originalWidth;
-    let originalHeight;
-    let originalX;
-    let originalY;
-    
-    resizer.addEventListener('mousedown', (e) => {
-        isResizing = true;
-        originalWidth = window.offsetWidth;
-        originalHeight = window.offsetHeight;
-        originalX = e.clientX;
-        originalY = e.clientY;
-        
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', stopResize);
+    setupStartMenuEasterEggs();
+}
+
+function setupStartMenuEasterEggs() {
+    const startMenuItems = document.querySelectorAll('.start-menu-item');
+    startMenuItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            switch (index) {
+                case 0:
+                    alert('🎤 *Static noise* Agent, this message will self-destruct in 5 seconds... Just kidding! 😄');
+                    break;
+                case 1:
+                    document.body.style.transition = 'transform 1s';
+                    document.body.style.transform = 'rotate(360deg)';
+                    setTimeout(() => (document.body.style.transform = 'rotate(0deg)'), 1000);
+                    break;
+                case 2:
+                    const messages = ["ACCESS DENIED: Nice try! 😎", "ERROR 404: Secrets not found... or are they? 🤔", "SYSTEM MESSAGE: The secrets are actually in another castle! 🏰"];
+                    alert(messages[Math.floor(Math.random() * messages.length)]);
+                    break;
+            }
+        });
     });
-    
-    function resize(e) {
-        if (isResizing) {
-            const width = originalWidth + (e.clientX - originalX);
-            const height = originalHeight + (e.clientY - originalY);
-            
-            if (width > 200) {
-                window.style.width = width + 'px';
-            }
-            if (height > 150) {
-                window.style.height = height + 'px';
-            }
-        }
-    }
-    
-    function stopResize() {
-        isResizing = false;
-        document.removeEventListener('mousemove', resize);
-        document.removeEventListener('mouseup', stopResize);
-    }
-});
+}
 
+// Window Management Functions
 function openWindow(id) {
-    const window = document.getElementById(`${id}-window`);
-    window.style.display = 'block';
-    window.style.left = '50%';
-    window.style.top = '50%';
-    window.style.transform = 'translate(-50%, -50%)';
-    
+    const windowElement = document.getElementById(`${id}-window`);
+    windowElement.style.display = 'block';
+    windowElement.style.left = '50%';
+    windowElement.style.top = '50%';
+    windowElement.style.transform = 'translate(-50%, -50%)';
+
     if (activeWindow) {
         activeWindow.style.zIndex = '1';
         activeWindow.classList.remove('active');
     }
-    window.style.zIndex = '2';
-    window.classList.add('active');
-    activeWindow = window;
+    windowElement.style.zIndex = '2';
+    windowElement.classList.add('active');
+    activeWindow = windowElement;
 
-    const header = window.querySelector('.window-header');
+    const header = windowElement.querySelector('.window-header');
     header.addEventListener('mousedown', startDragging);
+}
+function openWindowMP3(id) {
+  const windowElement = document.getElementById(id);
+  windowElement.style.display = 'block';
+  windowElement.style.left = '50%';
+  windowElement.style.top = '50%';
+  windowElement.style.transform = 'translate(-50%, -50%)';
+
+  if (activeWindow) {
+      activeWindow.style.zIndex = '1';
+      activeWindow.classList.remove('active');
+  }
+  windowElement.style.zIndex = '2';
+  windowElement.classList.add('active');
+  activeWindow = windowElement;
+
+  const header = windowElement.querySelector('.window-header');
+  header.addEventListener('mousedown', startDragging);
 }
 
 function closeWindow(id) {
-    const window = document.getElementById(`${id}-window`);
-    window.style.opacity = '0';
-    window.style.transform = 'scale(0.7)';
-    setTimeout(() => {
-        window.style.display = 'none';
-        window.style.opacity = '1';
-        window.style.transform = 'scale(1)';
-    }, 300);
+  const windowElement = document.getElementById(`${id}-window`);
+  if (windowElement) {
+      windowElement.style.opacity = '0';
+      windowElement.style.transform = 'scale(0.7)';
+      setTimeout(() => {
+          windowElement.style.display = 'none';
+          windowElement.style.opacity = '1';
+          windowElement.style.transform = 'scale(1)';
+      }, 300); // Matches the animation duration
+  } else {
+      console.error(`Window with ID "${id}" not found.`);
+  }
+}
+function closeWindowMP3(id) {
+  const windowElement = document.getElementById(id);
+  if (windowElement) {
+      windowElement.style.opacity = '0';
+      windowElement.style.transform = 'scale(0.7)';
+      setTimeout(() => {
+          windowElement.style.display = 'none';
+          windowElement.style.opacity = '1';
+          windowElement.style.transform = 'scale(1)';
+      }, 300); // Matches the animation duration
+  } else {
+      console.error(`Window with ID "${id}" not found.`);
+  }
 }
 
+
+function changeView(viewType) {
+  const container = document.querySelector('.gallery-grid');
+  if (viewType === 'thumbnails') {
+      container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+  } else {
+      container.style.gridTemplateColumns = '1fr';
+  }
+}
+
+// Dragging Windows
 function startDragging(e) {
     if (!isDragging) {
         isDragging = true;
-        const window = e.target.closest('.window');
-        activeWindow = window;
-        
+        const windowElement = e.target.closest('.window');
+        activeWindow = windowElement;
+
         if (activeWindow) {
-            const windows = document.querySelectorAll('.window');
-            windows.forEach(w => {
+            document.querySelectorAll('.window').forEach(w => {
                 w.style.zIndex = '1';
                 w.classList.remove('active');
             });
@@ -262,11 +250,8 @@ function startDragging(e) {
             activeWindow.classList.add('active');
         }
 
-        const rect = window.getBoundingClientRect();
-        offset = {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        };
+        const rect = windowElement.getBoundingClientRect();
+        offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
 
         document.addEventListener('mousemove', drag);
         document.addEventListener('mouseup', stopDragging);
@@ -278,7 +263,7 @@ function drag(e) {
         e.preventDefault();
         const x = e.clientX - offset.x;
         const y = e.clientY - offset.y;
-        
+
         activeWindow.style.left = `${x}px`;
         activeWindow.style.top = `${y}px`;
         activeWindow.style.transform = 'none';
@@ -291,6 +276,7 @@ function stopDragging() {
     document.removeEventListener('mouseup', stopDragging);
 }
 
+// Audio Functions
 function togglePlay() {
     if (audio.paused) {
         audio.play();
@@ -311,78 +297,33 @@ function nextSong() {
 }
 
 function playSong(index) {
-    const audio = document.getElementById('xp-audio');
     const songInfo = document.querySelector('.song-info');
-    
-    // Reset progress bar before loading new song
     progressBar.value = 0;
-    
+
     audio.src = songs[index].src;
-    songInfo.textContent = "Now Playing: " + songs[index].title;
-    
-    // Wait for metadata to load before playing
-    audio.addEventListener('loadedmetadata', function onceLoaded() {
-        audio.play();
-        audio.removeEventListener('loadedmetadata', onceLoaded);
-    });
+    audio.load();
+    songInfo.textContent = `Now Playing: ${songs[index].title}`;
+    audio.addEventListener('loadedmetadata', () => audio.play());
 }
 
 function updateVolume(value) {
-    const audio = document.getElementById('xp-audio');
     audio.volume = value;
 }
 
-function changeView(viewType) {
-    const container = document.querySelector('.gallery-grid');
-    if (viewType === 'thumbnails') {
-        container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
-    } else {
-        container.style.gridTemplateColumns = '1fr';
-    }
-}
-
-let clippyMessages = [
-    "Hi! I'm Clippy, your office assistant. It looks like you're exploring a portfolio. Would you like help with that?",
-    "Need help navigating around? Try clicking on the desktop icons!",
-    "Did you know you can drag windows around by their title bars?",
-    "Want to contact the portfolio owner? Try clicking the Contact icon!",
-    "Looking for technical skills? The Skills icon might be helpful!",
-];
-
-let currentMessageIndex = 0;
-
+// Clippy
 function clippySpeak() {
     const balloon = document.querySelector('.clippy-balloon');
     balloon.style.display = balloon.style.display === 'none' || !balloon.style.display ? 'block' : 'none';
-    
+
     if (balloon.style.display === 'block') {
+        const clippyMessages = [
+            "Hi! I'm Clippy, your office assistant. It looks like you're exploring a portfolio. Would you like help with that?",
+            "Need help navigating around? Try clicking on the desktop icons!",
+            "Did you know you can drag windows around by their title bars?",
+            "Want to contact the portfolio owner? Try clicking the Contact icon!",
+            "Looking for technical skills? The Skills icon might be helpful!"
+        ];
+        const currentMessageIndex = Math.floor(Math.random() * clippyMessages.length);
         balloon.textContent = clippyMessages[currentMessageIndex];
-        currentMessageIndex = (currentMessageIndex + 1) % clippyMessages.length;
     }
-}
-
-setInterval(() => {
-    const clippy = document.querySelector('.clippy');
-    if (Math.random() < 0.3) {
-        clippy.style.transform = `rotate(${(Math.random() - 0.5) * 20}deg)`;
-        setTimeout(() => {
-            clippy.style.transform = 'rotate(0deg)';
-        }, 500);
-    }
-}, 5000);
-
-function setupWindowBehavior() {
-    const windows = document.querySelectorAll('.window');
-    
-    windows.forEach(window => {
-        window.addEventListener('mousedown', () => {
-            if (activeWindow) {
-                activeWindow.style.zIndex = '1';
-                activeWindow.classList.remove('active');
-            }
-            window.style.zIndex = '2';
-            window.classList.add('active');
-            activeWindow = window;
-        });
-    });
 }
