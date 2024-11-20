@@ -11,7 +11,13 @@ const songs = [
     { src: "/assets/The HampsterDance Song.mp3", title: "Hampster Dance" },
     { src: "/assets/Keyboard Cat! - THE ORIGINAL!.mp3", title: "Keyboard Cat" },
     { src: "/assets/009 Sound System - With a Spirit (Short Version).mp3", title: "009 Sound System" },
-    { src: "/assets/scizzie - aquatic ambience.mp3", title: "Aquatic Ambience" }
+    { src: "/assets/scizzie - aquatic ambience.mp3", title: "Aquatic Ambience" },
+    { src: "/assets/Crazy Frog - Axel F (Official Video).mp3", title: "Crazy Frog" },
+    { src: "/assets/C418 - Moog City - Minecraft Volume Alpha.mp3", title: "C418 - Moog City" },
+    { src: "/assets/Djo - End of Beginning (Official Lyric Video).mp3", title: "The Forgotten Dream" }
+
+
+
 ];
 
 // Exposing Functions to Global Scope
@@ -78,7 +84,7 @@ function preloadFirstSong() {
     audio.src = firstSong.src;
     audio.load();
     songInfo.textContent = `Now Playing: ${firstSong.title}`;
-    audio.volume = 0.5;
+    audio.volume = 0.2;
 }
 
 function updateProgressBar() {
