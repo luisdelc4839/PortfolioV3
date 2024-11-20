@@ -1,13 +1,270 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows XP Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tahoma&display=swap" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
   <body>
-    <div id="app"></div>
+    <body>
+
+      <div class="custom-cursor">
+          <img src="/assets/cursorwhitepng.png"  width="32" height="32">
+      </div>
+      
+      <div class="desktop">
+          <div class="desktop-icon" onclick="openWindow('about')">
+              <img src="/assets/Date and Region.png" alt="A calendar page with color-coded dates superimposed on a globe" width="48" height="48">
+              <p>About Me</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('projects')">
+              <img src="/Windows XP Icons/Windows Catalog.png" alt="An open magazine or brochure with vibrant colored blocks" width="48" height="48">
+              <p>Projects</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('skills')">
+              <img src="/Windows XP Icons/Performance Monitor.png" alt="A speedometer-like gauge indicating performance" width="48" height="48">
+              <p>Skills</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('contact')">
+              <img src="/Windows XP Icons/Outlook Express.png" alt="Icon depicting email exchange with curved blue arrows" width="48" height="48">
+              <p>Contact</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('awards')">
+              <img src="/Windows XP Icons/Fax Sent Succesfully.png" alt="A document with a checkmark indicating success" width="48" height="48">
+              <p>Awards</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('academics')">
+              <img src="/Windows XP Icons/OE Mark as read.png" alt="A document with glasses icon" width="48" height="48">
+              <p>Academics</p>
+          </div>
+      
+          <div class="desktop-icon" onclick="openWindow('gallery')">
+              <img src="/Windows XP Icons/Click To Record.png" alt="A recording button icon" width="48" height="48">
+              <p>Gallery</p>
+          </div>
+      
+          <div id="welcome-window" class="window">
+              <div class="window-header">
+                  Welcome to My Portfolio!
+                  <button class="close-btn" onclick="closeWindow('welcome')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>👋 Welcome to My Windows XP Portfolio!</h2>
+                  <p>Thank you for visiting! Here's a quick guide on how to navigate:</p>
+                  <ul>
+                      <li>🖱️ Click on any desktop icon to open different sections</li>
+                      <li>📱 Drag windows by their title bars to move them around</li>
+                      <li>↔️ Resize windows by dragging the bottom-right corner</li>
+                      <li>🎵 Enjoy some nostalgic music with the media player</li>
+                      <li>📎 Click on Clippy if you need assistance!</li>
+                      <li>🔘 Use the Start button for some fun surprises</li>
+                  </ul>
+                  <p style="margin-top: 20px; color: #003399;">Ready to explore? Close this window and click on any desktop icon to get started!</p>
+              </div>
+          </div>
+      
+          <div id="about-window" class="window">
+              <div class="window-header">
+                  About Me
+                  <button class="close-btn" onclick="closeWindow('about')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Welcome to My Portfolio!</h2>
+                  <p>Hello! I'm [Your Name], a passionate developer with a love for creating amazing web experiences. Just like this Windows XP themed portfolio shows, I enjoy bringing nostalgia and creativity together!</p>
+              </div>
+          </div>
+      
+          <div id="projects-window" class="window">
+              <div class="window-header">
+                  My Projects
+                  <button class="close-btn" onclick="closeWindow('projects')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Featured Projects</h2>
+                  <ul>
+                      <li>Project 1 - Description</li>
+                      <li>Project 2 - Description</li>
+                      <li>Project 3 - Description</li>
+                  </ul>
+              </div>
+          </div>
+      
+          <div id="skills-window" class="window">
+              <div class="window-header">
+                  Skills
+                  <button class="close-btn" onclick="closeWindow('skills')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Technical Skills</h2>
+                  <ul>
+                      <li>HTML/CSS</li>
+                      <li>JavaScript</li>
+                      <li>React</li>
+                      <li>Node.js</li>
+                  </ul>
+              </div>
+          </div>
+      
+          <div id="contact-window" class="window">
+              <div class="window-header">
+                  Contact Me
+                  <button class="close-btn" onclick="closeWindow('contact')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Get in Touch</h2>
+                  <p>Email: your.email@example.com</p>
+                  <p>LinkedIn: linkedin.com/in/yourprofile</p>
+                  <p>GitHub: github.com/yourusername</p>
+              </div>
+          </div>
+      
+          <div id="awards-window" class="window">
+              <div class="window-header">
+                  Awards & Achievements
+                  <button class="close-btn" onclick="closeWindow('awards')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Awards & Recognition</h2>
+                  <ul>
+                      <li>🏆 First Place - Web Development Hackathon 2023</li>
+                      <li>🌟 Excellence in Innovation Award</li>
+                      <li>📊 Best Portfolio Design - Student Showcase</li>
+                      <li>💡 Outstanding Project Achievement</li>
+                  </ul>
+              </div>
+          </div>
+      
+          <div id="academics-window" class="window">
+              <div class="window-header">
+                  Academic History
+                  <button class="close-btn" onclick="closeWindow('academics')"></button>
+              </div>
+              <div class="window-content">
+                  <h2>Education</h2>
+                  <div style="margin-bottom: 20px;">
+                      <h3 style="color: #003399; margin: 0;">Bachelor's Degree in Computer Science</h3>
+                      <p style="margin: 5px 0;">University Name • 2019 - 2023</p>
+                      <p>GPA: 3.8/4.0</p>
+                  </div>
+                  
+                  <h2>Relevant Coursework</h2>
+                  <ul>
+                      <li>Advanced Web Development</li>
+                      <li>Data Structures & Algorithms</li>
+                      <li>Software Engineering</li>
+                      <li>Database Management</li>
+                  </ul>
+              </div>
+          </div>
+      
+          <div id="gallery-window" class="window">
+              <div class="window-header">
+                  Photo Gallery
+                  <button class="close-btn" onclick="closeWindow('gallery')"></button>
+              </div>
+              <div class="window-content">
+                  <div class="gallery-toolbar">
+                      <button onclick="changeView('thumbnails')">Thumbnails</button>
+                      <button onclick="changeView('list')">List View</button>
+                  </div>
+                  <div class="gallery-grid">
+                      <div class="gallery-item">
+                          <img src="/1695355251622.jpg" alt="A young man stands in front of the Air Force Research Laboratory building" width="200" height="150">
+                          <div class="gallery-item-title">Air Force Research Laboratory Visit</div>
+                      </div>
+                      
+                      <div class="gallery-item">
+                          <img src="/1702196249257.jpg" alt="A large group of smiling UTEP Aerospace students pose for a group photo" width="200" height="150">
+                          <div class="gallery-item-title">UTEP Aerospace Center Team</div>
+                      </div>
+                      
+                      <div class="gallery-item">
+                          <img src="/1722906111163.jpg" alt="Group photo with mentor in a modern office space" width="200" height="150">
+                          <div class="gallery-item-title">Professional Mentorship Session</div>
+                      </div>
+                      
+                      <div class="gallery-item">
+                          <img src="/1715874490021.jpg" alt="Conference badge from UTEP at Realize LIVE event" width="200" height="150">
+                          <div class="gallery-item-title">Realize LIVE Conference Badge</div>
+                      </div>
+                      
+                      <div class="gallery-item">
+                          <img src="/1715874489659.jpg" alt="Siemens conference presentation hall with speakers on stage" width="200" height="150">
+                          <div class="gallery-item-title">Siemens Conference Presentation</div>
+                      </div>
+                      
+                      <div class="gallery-item">
+                          <img src="/1719148856373.jpg" alt="A person stands next to a large Ronald McDonald Funko Pop figure" width="200" height="150">
+                          <div class="gallery-item-title">Ronald McDonald Funko Pop Display</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      
+          <div id="mp3-player" class="window">
+              <div class="window-header">
+                  Windows Media Player
+                  <button class="close-btn" onclick="closeWindow('mp3-player')"></button>
+              </div>
+              <div class="player-controls">
+                  <div class="song-info">Now Playing: Frutiger Aero</div>
+                  <audio id="xp-audio" src="/frutiger aero.mp3"></audio>
+                  <progress class="progress-bar" value="0" max="100"></progress>
+                  <div style="display: flex; gap: 5px; justify-content: center;">
+                      <button onclick="togglePlay()">Play/Pause</button>
+                      <button onclick="stopAudio()">Stop</button>
+                      <button onclick="nextSong()">Next</button>
+                  </div>
+                  <div class="volume-control">
+                      <span style="font-size: 12px;">Volume:</span>
+                      <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5" onchange="updateVolume(this.value)">
+                  </div>
+              </div>
+          </div>
+      
+          <div class="clippy" onclick="clippySpeak()">
+              <img src="/clippy2.png" alt="Clippy, the Microsoft Office Assistant with googly eyes and eyebrows on yellow notepad paper" width="120" height="120">
+              <div class="clippy-balloon">
+                  Hi! I'm Clippy, your office assistant. It looks like you're exploring a portfolio. Would you like help with that?
+              </div>
+          </div>
+      
+          <div class="taskbar">
+              <div class="start-button">
+                  Start
+              </div>
+          </div>
+      
+          <div class="start-menu">
+              <div class="start-menu-header">
+                  <img src="/assets/xplogo.png" alt="Windows XP Logo" width="40" height="40" style="margin-right: 10px;">
+                  Windows XP
+              </div>
+              <div class="start-menu-content">
+                  <div class="start-menu-item">
+                      <img src="/Windows XP Icons/Click To Record.png" alt="Recording button" width="24" height="24">
+                      Record a secret message
+                  </div>
+                  <div class="start-menu-item">
+                      <img src="/Windows XP Icons/Single Click.png" alt="Loading cursor" width="24" height="24">
+                      Do a barrel roll
+                  </div>
+                  <div class="start-menu-item">
+                      <img src="/Windows XP Icons/Registry Document.png" alt="Registry document" width="24" height="24">
+                      Access secret files
+                  </div>
+              </div>
+          </div>
+      </div>
+      
     <script type="module" src="/main.js"></script>
   </body>
 </html>
