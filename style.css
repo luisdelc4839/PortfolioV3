@@ -64,12 +64,14 @@ body {
 }
 
 .desktop-icon {
-  width: 80px;
-  margin: 15px;
-  padding: 5px;
-  text-align: center;
-  color: white;
-  cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90px; /* Adjust width to ensure proper alignment */
+    cursor: pointer;
+    color:white;
+    padding:5px;
 }
 
 .desktop-icon:hover {
