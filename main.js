@@ -141,7 +141,7 @@ function setupStartMenuEasterEggs() {
         item.addEventListener('click', () => {
             switch (index) {
                 case 0:
-                    alert('🎤 *Static noise* Agent, this message will self-destruct in 5 seconds... Just kidding! 😄');
+                    alert('You are not supposed to be here...');
                     break;
                 case 1:
                     document.body.style.transition = 'transform 1s';
@@ -149,7 +149,7 @@ function setupStartMenuEasterEggs() {
                     setTimeout(() => (document.body.style.transform = 'rotate(0deg)'), 1000);
                     break;
                 case 2:
-                    const messages = ["ACCESS DENIED: Nice try! 😎", "ERROR 404: Secrets not found... or are they? 🤔", "SYSTEM MESSAGE: The secrets are actually in another castle! 🏰"];
+                    const messages = ["You're not supposed to be here...", "Don't keep trying go away" , "REALLY?" ];
                     alert(messages[Math.floor(Math.random() * messages.length)]);
                     break;
             }
