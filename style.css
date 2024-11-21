@@ -346,7 +346,7 @@ body {
 }
 
 .clippy img {
-  content: url("/clippy2.png");
+  content: url("/assets/clippy2.png");
 }
 
 .clippy-balloon {
