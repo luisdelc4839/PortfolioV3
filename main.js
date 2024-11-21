@@ -7,7 +7,10 @@ let progressBar;
 let currentSongIndex = 0;
 
 const songs = [
-    { src: "/assets/frutigeraero.mp3", title: "Frutiger Aero" },
+    { src: "/assets/frutiger-aero.mp3", title: "Frutiger Aero" },
+    
+
+
 
 ];
 
@@ -107,6 +110,8 @@ function setupHoverEffects() {
     const cursorImg = document.querySelector('.custom-cursor img');
 
     hoverableElements.forEach(element => {
+        element.addEventListener('mouseenter', () => (cursorImg.src = '/assets/handcursor.png'));
+        element.addEventListener('mouseleave', () => (cursorImg.src = '/assets/cursorwhitepng.png'));
     });
 }
 
