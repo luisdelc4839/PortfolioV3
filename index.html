@@ -82,10 +82,21 @@
                   About Me
                   <button class="close-btn" onclick="closeWindow('about')"></button>
               </div>
-              <div class="window-content">
-                  <h2>Welcome to My Portfolio!</h2>
-                  <p>Driven by curiosity and a love for technology, I enjoy solving problems and turning ideas into real solutions. Whether it’s working through code, collaborating with a team, or improving a project, I bring dedication, adaptability, and a constant desire to learn. Fluent in English and Spanish, I value diversity and believe in the power of connecting with others. For me, software engineering isn’t just a job, it’s a way to create and make a difference</p>
-              </div>
+              <div class="window-content" style="background-color: #E3E3E3; border: 2px solid #C0C0C0; padding: 15px; font-family: 'Tahoma', sans-serif;">
+                <h2 style="text-align: center; color: #003399; margin-bottom: 15px; text-shadow: 1px 1px #FFFFFF;">
+                    Welcome to My Portfolio!
+                </h2>
+                <div style="background-color: #FFFFFF; border: 2px solid #C0C0C0; padding: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 4px #A9A9A9;">
+                    <img src="assets/me.jpg" alt="Luis Del Campo" style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid #C0C0C0; margin-right: 15px;">
+                    <p style="font-size: 14px; line-height: 1.5; color: #000000; margin: 0;">
+                        Driven by curiosity and a love for technology, I enjoy solving problems and turning ideas into real solutions. 
+                        Whether it’s working through code, collaborating with a team, or improving a project, I bring dedication, adaptability, 
+                        and a constant desire to learn. Fluent in English and Spanish, I value diversity and believe in the power of connecting 
+                        with others. For me, software engineering isn’t just a job, it’s a way to create and make a difference.
+                    </p>
+                </div>
+            </div>
+            
           </div>
       
           <div id="projects-window" class="window">
@@ -94,13 +105,81 @@
                   <button class="close-btn" onclick="closeWindow('projects')"></button>
               </div>
               <div class="window-content">
-                  <h2>Featured Projects</h2>
-                  <ul>
-                      <li>Project 1 - Description</li>
-                      <li>Project 2 - Description</li>
-                      <li>Project 3 - Description</li>
-                  </ul>
-              </div>
+                <h2>Featured Projects & Experience</h2>
+                <ul style="list-style-type: none; padding: 0;">
+                    <!-- AFRL Experience -->
+                    <li style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <img src="assets/AFRL.png" alt="AFRL Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <strong>Air Force Research Laboratory (AFRL) – Machine Learning Intern</strong>
+                            <p>
+                                Optimized HD (1920x1080) image analysis using selective tiling and RoI (regions of interest), 
+                                increasing algorithm speed by 20% compared to traditional pixel-by-pixel methods. Conducted 
+                                comprehensive research on selective tiling and RoI, presenting findings through government-approved 
+                                poster and research paper. Delivered results using Python, PyTorch, CUDA, and pre-trained datasets 
+                                like COCO, overcoming a steep machine learning learning curve.
+                            </p>
+                        </div>
+                    </li>
+                    
+                    <!-- McDonald's Experience -->
+                    <li style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <img src="assets/McDonalds-Logo.png" alt="McDonald's Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <strong>McDonald's Corporation – Software Engineer Intern (Global Kiosk Team)</strong>
+                            <p>
+                                Resolved critical software issues impacting discount calculations and grill recommendations, 
+                                improving user satisfaction across 38,000+ locations in over 100 countries. Collaborated with 
+                                an 8-engineer team on kiosk software deployment worldwide, participating in bi-weekly meetings 
+                                to ensure feature alignment and operational stability.
+                            </p>
+                        </div>
+                    </li>
+            
+                    <!-- Aerospace Center Experience -->
+                    <li style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <img src="assets/aerospace.jpg" alt="Aerospace Center Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <strong>Aerospace Center (cSETR) – IT Technician</strong>
+                            <p>
+                                Administered AWS cloud infrastructure for 100+ aerospace engineers, streamlining project performance 
+                                and compliance for NASA and Blue Origin deliverables. Provisioned secure, ITAR-compliant AWS EC2 
+                                instances and resolved technical issues, ensuring reliable engineering workflows. Led troubleshooting 
+                                meetings with Siemens technicians and engineers for efficient problem-solving.
+                            </p>
+                        </div>
+                    </li>
+            
+                    <!-- INFILTR8 Project -->
+                    <li style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <img src="assets/utep.png" alt="INFILTR8 Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <strong>INFILTR8 – Cybersecurity Penetration Testing Tool</strong>
+                            <p>
+                                Developed a web application using SvelteKit, Flask, and Neo4j, enhancing vulnerability detection 
+                                efficiency by 25% through machine learning-based prioritization. Designed real-time progress tracking 
+                                and project management features, reducing testing time by 30%. Delivered the project as part of an Agile 
+                                team, achieving a 95% user satisfaction score during testing.
+                            </p>
+                        </div>
+                    </li>
+            
+                    <!-- Advanced Airline System Project -->
+                    <li style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <img src="assets/utep.png" alt="Airline System Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+                        <div>
+                            <strong>Advanced Object-Oriented Airline System</strong>
+                            <p>
+                                Designed and implemented a comprehensive airline reservation system in Java with over 15 classes, 
+                                leveraging object-oriented programming principles such as inheritance, encapsulation, and polymorphism 
+                                for enhanced modularity. Created UML diagrams, use cases, and scenarios to streamline team collaboration 
+                                and communication.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
           </div>
       
           <div id="skills-window" class="window">
@@ -108,15 +187,54 @@
                   Skills
                   <button class="close-btn" onclick="closeWindow('skills')"></button>
               </div>
-              <div class="window-content">
-                  <h2>Technical Skills</h2>
-                  <ul>
-                      <li>HTML/CSS</li>
-                      <li>JavaScript</li>
-                      <li>React</li>
-                      <li>Node.js</li>
-                  </ul>
-              </div>
+              <div class="window-content" style="background-color: #E3E3E3; border: 2px solid #C0C0C0; padding: 15px; font-family: 'Tahoma', sans-serif;">
+                <h2 style="text-align: center; color: #003399; margin-bottom: 15px; text-shadow: 1px 1px #FFFFFF;">
+                    Technical Skills
+                </h2>
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #000000;">
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            <strong>Programming Languages:</strong>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            Java, Python, C#, HTML/CSS, JavaScript
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            <strong>Frameworks & Libraries:</strong>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            React, Angular, SvelteKit, Tailwind, PyTorch
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            <strong>Cloud Platforms & Tools:</strong>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            AWS, Firebase, Git (GitHub)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            <strong>Collaboration Tools:</strong>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            Jira, Confluence, Asana
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            <strong>Soft Skills:</strong>
+                        </td>
+                        <td style="padding: 8px; border: 1px solid #C0C0C0;">
+                            Fluent in English & Spanish, Team Collaboration, Problem Solving, Results-Driven
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
           </div>
       
           <div id="contact-window" class="window">
@@ -124,12 +242,29 @@
                   Contact Me
                   <button class="close-btn" onclick="closeWindow('contact')"></button>
               </div>
-              <div class="window-content">
-                  <h2>Get in Touch</h2>
-                  <p>Email: ldelcampo4839@outlook.com</p>
-                  <p>LinkedIn: https://www.linkedin.com/in/lldelcampo</p>
-                  <p>GitHub: https://www.github.com/luisdelc4839</p>
-              </div>
+              <div class="window-content" style="background-color: #E3E3E3; border: 2px solid #C0C0C0; padding: 15px; font-family: 'Tahoma', sans-serif;">
+                <h2 style="text-align: center; color: #003399; margin-bottom: 15px; text-shadow: 1px 1px #FFFFFF;">
+                    Get in Touch
+                </h2>
+                <p style="font-size: 14px; margin: 5px 0;">
+                    <strong>Email:</strong> 
+                    <a href="mailto:ldelcampo4839@outlook.com" style="color: #003399; text-decoration: none;">
+                        ldelcampo4839@outlook.com
+                    </a>
+                </p>
+                <p style="font-size: 14px; margin: 5px 0;">
+                    <strong>LinkedIn:</strong> 
+                    <a href="https://www.linkedin.com/in/lldelcampo" target="_blank" style="color: #003399; text-decoration: none;">
+                        https://www.linkedin.com/in/lldelcampo
+                    </a>
+                </p>
+                <p style="font-size: 14px; margin: 5px 0;">
+                    <strong>GitHub:</strong> 
+                    <a href="https://www.github.com/luisdelc4839" target="_blank" style="color: #003399; text-decoration: none;">
+                        https://www.github.com/luisdelc4839
+                    </a>
+                </p>
+            </div>
           </div>
       
           <div id="awards-window" class="window">
@@ -141,8 +276,8 @@
                   <h2>Awards & Recognition</h2>
                   <ul>
                       <li>🏆 Scholarship to attend TAPIA 2024 Conference - San Diego, CA</li>
-                      <li>🌟 Scholarship to attend Siemens Realize Live Conference - Las Vegas, NV</li>
-                      <li>📊 Dean's list through the years of 2021-2024</li>
+                      <li>🏆 Scholarship to attend Siemens Realize Live Conference - Las Vegas, NV</li>
+                      <li>🏆 Dean's list through the years of 2021-2024</li>
                   </ul>
               </div>
           </div>
@@ -183,7 +318,7 @@
                   <div class="gallery-grid">
                       <div class="gallery-item">
                           <img src="/assets/1695355251622.jpg" alt="A young man stands in front of the Air Force Research Laboratory building" width="200" height="150">
-                          <div class="gallery-item-title">Air Force Research Laboratory Visit</div>
+                          <div class="gallery-item-title">Air Force Research Laboratory Internship 2023</div>
                       </div>
                       
                       <div class="gallery-item">
@@ -193,7 +328,7 @@
                       
                       <div class="gallery-item">
                           <img src="/assets/1722906111163.jpg" alt="Group photo with mentor in a modern office space" width="200" height="150">
-                          <div class="gallery-item-title">Professional Mentorship Session</div>
+                          <div class="gallery-item-title">Summer Internship @ McDonald's</div>
                       </div>
                       
                       <div class="gallery-item">
@@ -208,7 +343,7 @@
                       
                       <div class="gallery-item">
                           <img src="/assets/1719148856373.jpg" alt="A person stands next to a large Ronald McDonald Funko Pop figure" width="200" height="150">
-                          <div class="gallery-item-title">Ronald McDonald Funko Pop Display</div>
+                          <div class="gallery-item-title">Favorite Internship Picture</div>
                       </div>
                   </div>
               </div>
