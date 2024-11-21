@@ -6,9 +6,11 @@ let audio;
 let progressBar;
 let currentSongIndex = 0;
 
+import songFile from '/assets/frutiger-aero.mp3';
 const songs = [
-    { src: "/assets/frutiger-aero.mp3", title: "Frutiger Aero" }
+    { src: songFile, title: "Frutiger Aero" }
 ];
+
 
 // Exposing Functions to Global Scope
 window.openWindow = openWindow;
