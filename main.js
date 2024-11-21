@@ -107,7 +107,6 @@ function setupHoverEffects() {
     const cursorImg = document.querySelector('.custom-cursor img');
 
     hoverableElements.forEach(element => {
-        element.addEventListener('mouseenter', () => (cursorImg.src = '/assets/handcursor.png'));
         element.addEventListener('mouseleave', () => (cursorImg.src = '/assets/cursorwhitepng.png'));
     });
 }
