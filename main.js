@@ -8,15 +8,6 @@ let currentSongIndex = 0;
 
 const songs = [
     { src: "/assets/frutiger aero.mp3", title: "Frutiger Aero" },
-    { src: "/assets/The HampsterDance Song.mp3", title: "Hampster Dance" },
-    { src: "/assets/Keyboard Cat! - THE ORIGINAL!.mp3", title: "Keyboard Cat" },
-    { src: "/assets/009 Sound System - With a Spirit (Short Version).mp3", title: "009 Sound System" },
-    { src: "/assets/scizzie - aquatic ambience.mp3", title: "Aquatic Ambience" },
-    { src: "/assets/Crazy Frog - Axel F (Official Video).mp3", title: "Crazy Frog" },
-    { src: "/assets/C418 - Moog City - Minecraft Volume Alpha.mp3", title: "C418 - Moog City" },
-    { src: "/assets/Djo - End of Beginning (Official Lyric Video).mp3", title: "The Forgotten Dream" }
-
-
 
 ];
 
