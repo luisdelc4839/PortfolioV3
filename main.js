@@ -8,10 +8,6 @@ let currentSongIndex = 0;
 
 const songs = [
     { src: "/assets/frutiger-aero.mp3", title: "Frutiger Aero" },
-    
-
-
-
 ];
 
 // Exposing Functions to Global Scope
@@ -26,12 +22,8 @@ window.changeView = changeView;
 window.closeWindowMP3 = closeWindowMP3;
 window.openWindowMP3 = openWindowMP3;
 
-
 // DOMContentLoaded Listener
 document.addEventListener('DOMContentLoaded', () => {
-    const cursor = document.querySelector('.custom-cursor');
-    cursor.style.display = 'block';
-
     audio = document.getElementById('xp-audio');
     progressBar = document.querySelector('.progress-bar');
 
@@ -50,22 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         openWindow('welcome');
         positionWelcomeWindow();
     }, 500);
-
-    // Debounce Mouse Movement for Custom Cursor
-    const debounce = (func, wait) => {
-        let timeout;
-        return (...args) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func(...args), wait);
-        };
-    };
-
-    document.addEventListener('mousemove', debounce(updateCursor, 5));
-    document.addEventListener('mouseleave', () => (cursor.style.opacity = '0'));
-    document.addEventListener('mouseenter', () => (cursor.style.opacity = '1'));
-
-    // Hover Effects for Cursor
-    setupHoverEffects();
 
     // Start Menu Toggle
     setupStartMenu();
@@ -97,22 +73,6 @@ function positionWelcomeWindow() {
     welcomeWindow.style.top = '50%';
     welcomeWindow.style.transform = 'translate(-50%, -50%)';
     welcomeWindow.style.width = '500px';
-}
-
-function updateCursor(e) {
-    const cursor = document.querySelector('.custom-cursor');
-    cursor.style.left = `${e.clientX}px`;
-    cursor.style.top = `${e.clientY}px`;
-}
-
-function setupHoverEffects() {
-    const hoverableElements = document.querySelectorAll('.desktop-icon, .window-header, .close-btn, .clippy, .start-button');
-    const cursorImg = document.querySelector('.custom-cursor img');
-
-    hoverableElements.forEach(element => {
-        element.addEventListener('mouseenter', () => (cursorImg.src = '/assets/handcursor.png'));
-        element.addEventListener('mouseleave', () => (cursorImg.src = '/assets/cursorwhitepng.png'));
-    });
 }
 
 function setupStartMenu() {
@@ -149,7 +109,7 @@ function setupStartMenuEasterEggs() {
                     setTimeout(() => (document.body.style.transform = 'rotate(0deg)'), 1000);
                     break;
                 case 2:
-                    const messages = ["You're not supposed to be here...", "Don't keep trying go away" , "REALLY?" ];
+                    const messages = ["You're not supposed to be here...", "Don't keep trying go away", "REALLY?"];
                     alert(messages[Math.floor(Math.random() * messages.length)]);
                     break;
             }
@@ -176,62 +136,63 @@ function openWindow(id) {
     const header = windowElement.querySelector('.window-header');
     header.addEventListener('mousedown', startDragging);
 }
+
 function openWindowMP3(id) {
-  const windowElement = document.getElementById(id);
-  windowElement.style.display = 'block';
-  windowElement.style.left = '50%';
-  windowElement.style.top = '50%';
-  windowElement.style.transform = 'translate(-50%, -50%)';
+    const windowElement = document.getElementById(id);
+    windowElement.style.display = 'block';
+    windowElement.style.left = '50%';
+    windowElement.style.top = '50%';
+    windowElement.style.transform = 'translate(-50%, -50%)';
 
-  if (activeWindow) {
-      activeWindow.style.zIndex = '1';
-      activeWindow.classList.remove('active');
-  }
-  windowElement.style.zIndex = '2';
-  windowElement.classList.add('active');
-  activeWindow = windowElement;
+    if (activeWindow) {
+        activeWindow.style.zIndex = '1';
+        activeWindow.classList.remove('active');
+    }
+    windowElement.style.zIndex = '2';
+    windowElement.classList.add('active');
+    activeWindow = windowElement;
 
-  const header = windowElement.querySelector('.window-header');
-  header.addEventListener('mousedown', startDragging);
+    const header = windowElement.querySelector('.window-header');
+    header.addEventListener('mousedown', startDragging);
 }
 
 function closeWindow(id) {
-  const windowElement = document.getElementById(`${id}-window`);
-  if (windowElement) {
-      windowElement.style.opacity = '0';
-      windowElement.style.transform = 'scale(0.7)';
-      setTimeout(() => {
-          windowElement.style.display = 'none';
-          windowElement.style.opacity = '1';
-          windowElement.style.transform = 'scale(1)';
-      }, 300); // Matches the animation duration
-  } else {
-      console.error(`Window with ID "${id}" not found.`);
-  }
-}
-function closeWindowMP3(id) {
-  const windowElement = document.getElementById(id);
-  if (windowElement) {
-      windowElement.style.opacity = '0';
-      windowElement.style.transform = 'scale(0.7)';
-      setTimeout(() => {
-          windowElement.style.display = 'none';
-          windowElement.style.opacity = '1';
-          windowElement.style.transform = 'scale(1)';
-      }, 300); // Matches the animation duration
-  } else {
-      console.error(`Window with ID "${id}" not found.`);
-  }
+    const windowElement = document.getElementById(`${id}-window`);
+    if (windowElement) {
+        windowElement.style.opacity = '0';
+        windowElement.style.transform = 'scale(0.7)';
+        setTimeout(() => {
+            windowElement.style.display = 'none';
+            windowElement.style.opacity = '1';
+            windowElement.style.transform = 'scale(1)';
+        }, 300); // Matches the animation duration
+    } else {
+        console.error(`Window with ID "${id}" not found.`);
+    }
 }
 
+function closeWindowMP3(id) {
+    const windowElement = document.getElementById(id);
+    if (windowElement) {
+        windowElement.style.opacity = '0';
+        windowElement.style.transform = 'scale(0.7)';
+        setTimeout(() => {
+            windowElement.style.display = 'none';
+            windowElement.style.opacity = '1';
+            windowElement.style.transform = 'scale(1)';
+        }, 300); // Matches the animation duration
+    } else {
+        console.error(`Window with ID "${id}" not found.`);
+    }
+}
 
 function changeView(viewType) {
-  const container = document.querySelector('.gallery-grid');
-  if (viewType === 'thumbnails') {
-      container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
-  } else {
-      container.style.gridTemplateColumns = '1fr';
-  }
+    const container = document.querySelector('.gallery-grid');
+    if (viewType === 'thumbnails') {
+        container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+    } else {
+        container.style.gridTemplateColumns = '1fr';
+    }
 }
 
 // Dragging Windows

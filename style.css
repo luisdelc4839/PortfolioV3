@@ -5,7 +5,6 @@ body {
   font-family: 'Tahoma', sans-serif;
   overflow: hidden;
   background: #000;
-  cursor: none; /* Hide the default cursor */
 }
 
 /* Apply Tahoma to all elements */
