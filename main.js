@@ -7,7 +7,7 @@ let progressBar;
 let currentSongIndex = 0;
 
 const songs = [
-    { src: "/assets/frutiger-aero.mp3", title: "Frutiger Aero" },
+    { src: "/assets/frutiger-aero.mp3", title: "Frutiger Aero" }
 ];
 
 // Exposing Functions to Global Scope
